@@ -1,0 +1,2474 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Quem é Quem? | Grupo Doria</title>
+
+  <style>
+
+    :root {
+      --red: #e50920;
+      --dark: #ad0616;
+      --green: #14865d;
+      --bad: #bd2633;
+      --ink: #222;
+      --muted: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      color: var(--ink);
+
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 8% 5%,
+          #ffd7dc 0,
+          transparent 26%
+        ),
+        radial-gradient(
+          circle at 94% 12%,
+          #ffe9eb 0,
+          transparent 26%
+        ),
+        linear-gradient(
+          145deg,
+          #fff 0,
+          #fff7f8 55%,
+          #f1f1f1 100%
+        );
+    }
+
+
+    .wrap {
+
+      max-width: 1180px;
+
+      margin: auto;
+
+      padding:
+        25px 18px 50px;
+    }
+
+
+    .brand {
+
+      text-align: center;
+
+      color: var(--red);
+
+      font-size: 30px;
+
+      font-weight: 900;
+
+      letter-spacing: .6px;
+    }
+
+
+    .hero {
+
+      text-align: center;
+
+      margin:
+        10px 0 22px;
+    }
+
+
+    .hero h1 {
+
+      font-size:
+        clamp(
+          38px,
+          5vw,
+          58px
+        );
+
+      margin: 8px;
+    }
+
+
+    .hero h1 span {
+
+      color:
+        var(--red);
+    }
+
+
+    .hero p {
+
+      color:
+        #666;
+    }
+
+
+    .screen {
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .97
+        );
+
+      border:
+        1px solid
+        #f1e1e3;
+
+      border-radius:
+        26px;
+
+      padding:
+        25px;
+
+      box-shadow:
+        0 22px 60px
+        #70000d18;
+    }
+
+
+    .center {
+
+      text-align:
+        center;
+
+      max-width:
+        760px;
+
+      margin:
+        auto;
+    }
+
+
+    .hidden {
+
+      display:
+        none !important;
+    }
+
+
+    .pill {
+
+      display:
+        inline-block;
+
+      background:
+        var(--red);
+
+      color:
+        #fff;
+
+      padding:
+        7px 13px;
+
+      border-radius:
+        999px;
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+    }
+
+
+    .input {
+
+      width:
+        100%;
+
+      max-width:
+        430px;
+
+      padding:
+        14px;
+
+      border:
+        2px solid
+        #eee;
+
+      border-radius:
+        13px;
+
+      font-size:
+        17px;
+    }
+
+
+    .input:focus {
+
+      outline:
+        none;
+
+      border-color:
+        var(--red);
+    }
+
+
+    .countdown {
+
+      height:
+        100px;
+
+      padding-top:
+        12px;
+
+      font-size:
+        68px;
+
+      font-weight:
+        900;
+
+      color:
+        var(--red);
+    }
+
+
+    .btn {
+
+      border:
+        0;
+
+      border-radius:
+        12px;
+
+      padding:
+        12px 20px;
+
+      background:
+        var(--red);
+
+      color:
+        #fff;
+
+      font-weight:
+        800;
+
+      cursor:
+        pointer;
+    }
+
+
+    .btn:hover {
+
+      filter:
+        brightness(.94);
+    }
+
+
+    .btn.alt {
+
+      background:
+        #eee;
+
+      color:
+        #333;
+
+      margin-left:
+        7px;
+    }
+
+
+    .top {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      gap:
+        16px;
+
+      flex-wrap:
+        wrap;
+    }
+
+
+    .stats {
+
+      display:
+        flex;
+
+      gap:
+        9px;
+    }
+
+
+    .stat {
+
+      padding:
+        10px 14px;
+
+      background:
+        #fff3f4;
+
+      border:
+        1px solid
+        #f0cdd2;
+
+      border-radius:
+        12px;
+
+      color:
+        var(--dark);
+
+      font-weight:
+        800;
+    }
+
+
+    .board {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        28px;
+
+      margin-top:
+        18px;
+    }
+
+
+    .grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 1fr)
+        );
+
+      gap:
+        11px;
+    }
+
+
+    .card {
+
+      background:
+        #fff;
+
+      border:
+        2px solid
+        #eee;
+
+      border-radius:
+        16px;
+
+      padding:
+        8px;
+
+      cursor:
+        pointer;
+
+      transition:
+        .15s;
+
+      box-shadow:
+        0 5px 18px
+        #65000a0b;
+    }
+
+
+    .card:hover {
+
+      transform:
+        translateY(-2px);
+
+      border-color:
+        #ff9ba5;
+    }
+
+
+    .card.selected {
+
+      border-color:
+        var(--red);
+
+      background:
+        #fff5f6;
+
+      box-shadow:
+        0 0 0 3px
+        #e5092014;
+    }
+
+
+    .card.matched {
+
+      border-color:
+        var(--green);
+
+      opacity:
+        .55;
+
+      pointer-events:
+        none;
+    }
+
+
+    .photo {
+
+      aspect-ratio:
+        1;
+
+      border-radius:
+        11px;
+
+      overflow:
+        hidden;
+
+      background:
+        linear-gradient(
+          145deg,
+          #f4f4f4,
+          #e7e7e7
+        );
+
+      display:
+        grid;
+
+      place-items:
+        center;
+    }
+
+
+    .photo img {
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+
+      display:
+        block;
+    }
+
+
+    .missing {
+
+      text-align:
+        center;
+
+      color:
+        #888;
+
+      font-size:
+        13px;
+
+      padding:
+        8px;
+
+      word-break:
+        break-word;
+    }
+
+
+    .card strong {
+
+      display:
+        block;
+
+      margin:
+        8px;
+    }
+
+
+    .feedback {
+
+      text-align:
+        center;
+
+      min-height:
+        28px;
+
+      margin:
+        18px;
+
+      font-weight:
+        800;
+    }
+
+
+    .good {
+
+      color:
+        var(--green);
+    }
+
+
+    .bad {
+
+      color:
+        var(--bad);
+    }
+
+
+    .ranking {
+
+      max-width:
+        680px;
+
+      margin:
+        22px auto;
+    }
+
+
+    .rankhead,
+    .rankrow {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        70px 1fr 120px;
+
+      gap:
+        10px;
+
+      align-items:
+        center;
+
+      text-align:
+        left;
+
+      padding:
+        13px 15px;
+    }
+
+
+    .rankhead {
+
+      font-size:
+        12px;
+
+      color:
+        #777;
+
+      font-weight:
+        800;
+    }
+
+
+    .rankrow {
+
+      border-top:
+        1px solid
+        #eee;
+    }
+
+
+    .rankrow.first {
+
+      background:
+        #fff0f2;
+
+      border:
+        0;
+
+      border-radius:
+        13px;
+    }
+
+
+    .time {
+
+      text-align:
+        right;
+
+      font-weight:
+        800;
+    }
+
+
+    .trophy {
+
+      font-size:
+        58px;
+    }
+
+
+    .footer {
+
+      text-align:
+        center;
+
+      color:
+        #888;
+
+      font-size:
+        12px;
+
+      margin-top:
+        18px;
+    }
+
+
+    @media(max-width:850px) {
+
+      .grid {
+
+        grid-template-columns:
+          repeat(
+            2,
+            1fr
+          );
+      }
+
+    }
+
+
+    @media(max-width:650px) {
+
+      .board {
+
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .rankhead,
+      .rankrow {
+
+        grid-template-columns:
+          48px 1fr 90px;
+      }
+
+
+      .btn.alt {
+
+        margin-left:
+          0;
+
+        margin-top:
+          8px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+<main class="wrap">
+
+
+  <div class="brand">
+
+    GRUPO DORIA
+
+  </div>
+
+
+  <div class="hero">
+
+    <span class="pill">
+
+      DINÂMICA DA EQUIPE
+
+    </span>
+
+
+    <h1>
+
+      Quem é
+
+      <span>
+
+        Quem?
+
+      </span>
+
+      👀
+
+    </h1>
+
+
+    <p>
+
+      Encontre todos os pares
+      no menor tempo possível.
+
+    </p>
+
+  </div>
+
+
+
+  <!-- ========================= -->
+  <!-- PÁGINA 1: IDENTIFICAÇÃO   -->
+  <!-- ========================= -->
+
+
+  <section
+    id="screen1"
+    class="screen center"
+  >
+
+
+    <span class="pill">
+
+      1 • IDENTIFICAÇÃO
+
+    </span>
+
+
+    <h2>
+
+      Pronto para jogar?
+
+    </h2>
+
+
+    <p>
+
+      Digite seu nome para
+      entrar no ranking desta sessão.
+
+    </p>
+
+
+    <input
+      id="username"
+      class="input"
+      maxlength="30"
+      placeholder="Digite seu nome"
+      autocomplete="off"
+    >
+
+
+    <div
+      id="countdown"
+      class="countdown"
+    ></div>
+
+
+    <button
+      id="startBtn"
+      class="btn"
+    >
+
+      COMEÇAR
+
+    </button>
+
+
+    <button
+      id="rankBtn"
+      class="btn alt"
+    >
+
+      VER RANKING
+
+    </button>
+
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- PÁGINA 2: JOGO            -->
+  <!-- ========================= -->
+
+
+  <section
+    id="screen2"
+    class="screen hidden"
+  >
+
+
+    <div class="top">
+
+
+      <div>
+
+        <b>
+
+          Jogador:
+
+          <span
+            id="player"
+            style="color:var(--dark)"
+          ></span>
+
+        </b>
+
+
+        <div
+          style="
+            color:#777;
+            font-size:14px
+          "
+        >
+
+          Complete os 11 pares.
+
+        </div>
+
+      </div>
+
+
+      <div class="stats">
+
+
+        <div class="stat">
+
+          ⏱
+
+          <span id="timer">
+
+            00:00.0
+
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          ✓
+
+          <span id="hits">
+
+            0
+
+          </span>
+
+          /11
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <div class="board">
+
+
+      <!-- CRIANÇAS -->
+
+
+      <div>
+
+
+        <h3>
+
+          🧸 CRIANÇA
+
+        </h3>
+
+
+        <div
+          id="children"
+          class="grid"
+        ></div>
+
+
+      </div>
+
+
+
+      <!-- ADULTOS -->
+
+
+      <div>
+
+
+        <h3>
+
+          📸 ATUAL
+
+        </h3>
+
+
+        <div
+          id="adults"
+          class="grid"
+        ></div>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <div
+      id="feedback"
+      class="feedback"
+    >
+
+      Encontre todos os pares.
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- ========================= -->
+  <!-- PÁGINA 3: RANKING         -->
+  <!-- ========================= -->
+
+
+  <section
+    id="screen3"
+    class="screen center hidden"
+  >
+
+
+    <div class="trophy">
+
+      🏆
+
+    </div>
+
+
+    <span class="pill">
+
+      3 • RANKING
+
+    </span>
+
+
+    <h2>
+
+      Ranking geral
+
+    </h2>
+
+
+    <p id="resultText"></p>
+
+
+    <div
+      id="ranking"
+      class="ranking"
+    ></div>
+
+
+    <button
+      id="newBtn"
+      class="btn"
+    >
+
+      NOVO PARTICIPANTE
+
+    </button>
+
+
+  </section>
+
+
+
+  <div class="footer">
+
+    O ranking permanece enquanto
+    esta página estiver aberta.
+    Ao atualizar ou fechar,
+    o ranking é zerado.
+
+  </div>
+
+
+</main>
+
+
+
+<script>
+
+'use strict';
+
+
+/*
+=====================================
+CONFIGURAÇÃO
+=====================================
+
+O jogo atualmente possui 11 pares.
+
+Estrutura esperada:
+
+index.html
+
+fotos/
+  criancas/
+    criança_01.jpeg
+    criança_02.jpeg
+    ...
+    criança_11.jpeg
+
+  adultos/
+    atual_01.jpeg
+    atual_02.jpeg
+    ...
+    atual_11.jpeg
+
+O ID determina os pares:
+
+01 ↔ 01
+02 ↔ 02
+...
+11 ↔ 11
+*/
+
+
+const TOTAL = 11;
+
+
+const el = id =>
+  document.getElementById(id);
+
+
+
+/*
+=====================================
+PESSOAS
+=====================================
+*/
+
+
+const people =
+  Array.from(
+
+    {
+      length:
+        TOTAL
+    },
+
+    (_, i) => {
+
+
+      const n =
+        String(
+          i + 1
+        )
+        .padStart(
+          2,
+          '0'
+        );
+
+
+      return {
+
+        id:
+          i + 1,
+
+
+        /*
+        FOTO DA CRIANÇA
+        */
+
+        child:
+          `fotos/criancas/criança_${n}.jpeg`,
+
+
+        /*
+        FOTO ATUAL
+        */
+
+        adult:
+          `fotos/adultos/atual_${n}.jpeg`,
+
+
+        childLabel:
+          `Criança ${n}`,
+
+
+        adultLabel:
+          `Atual ${n}`
+
+      };
+
+    }
+
+  );
+
+
+
+/*
+=====================================
+ESTADO DO JOGO
+=====================================
+*/
+
+
+let childChoice =
+  null;
+
+
+let adultChoice =
+  null;
+
+
+let hits =
+  0;
+
+
+let busy =
+  false;
+
+
+let playerName =
+  '';
+
+
+let startedAt =
+  0;
+
+
+let elapsed =
+  0;
+
+
+let timerId =
+  null;
+
+
+/*
+Ranking em memória.
+
+Não usamos localStorage
+por causa da restrição do
+sandbox do SharePoint.
+*/
+
+
+let rankingMemory =
+  [];
+
+
+
+/*
+=====================================
+TROCAR DE PÁGINA
+=====================================
+*/
+
+
+function showScreen(
+  number
+) {
+
+
+  el('screen1')
+    .classList
+    .add('hidden');
+
+
+  el('screen2')
+    .classList
+    .add('hidden');
+
+
+  el('screen3')
+    .classList
+    .add('hidden');
+
+
+  el(
+    'screen' +
+    number
+  )
+  .classList
+  .remove('hidden');
+
+}
+
+
+
+/*
+=====================================
+EMBARALHAR
+=====================================
+*/
+
+
+function shuffle(
+  array
+) {
+
+
+  const copy =
+    [...array];
+
+
+  for (
+
+    let i =
+      copy.length - 1;
+
+    i > 0;
+
+    i--
+
+  ) {
+
+
+    const j =
+      Math.floor(
+
+        Math.random() *
+        (i + 1)
+
+      );
+
+
+    [
+
+      copy[i],
+      copy[j]
+
+    ] = [
+
+
+
+      copy[j],
+      copy[i]
+
+    ];
+
+  }
+
+
+  return copy;
+
+}
+
+
+
+/*
+=====================================
+FORMATAR TEMPO
+=====================================
+*/
+
+
+function formatTime(
+  ms
+) {
+
+
+  const min =
+    Math.floor(
+      ms / 60000
+    );
+
+
+  const sec =
+    Math.floor(
+
+      (ms % 60000) /
+      1000
+
+    );
+
+
+  const tenth =
+    Math.floor(
+
+      (ms % 1000) /
+      100
+
+    );
+
+
+  return (
+
+    String(min)
+      .padStart(
+        2,
+        '0'
+      )
+
+    +
+
+    ':'
+
+    +
+
+    String(sec)
+      .padStart(
+        2,
+        '0'
+      )
+
+    +
+
+    '.'
+
+    +
+
+    tenth
+
+  );
+
+}
+
+
+
+/*
+=====================================
+SEGURANÇA DO NOME
+=====================================
+*/
+
+
+function safe(
+  value
+) {
+
+
+  return String(value)
+    .replace(
+
+      /[&<>"']/g,
+
+      c => ({
+
+        '&':
+          '&amp;',
+
+        '<':
+          '&lt;',
+
+        '>':
+          '&gt;',
+
+        '"':
+          '&quot;',
+
+        "'":
+          '&#39;'
+
+      }[c])
+
+    );
+
+}
+
+
+
+/*
+=====================================
+RANKING
+=====================================
+*/
+
+
+function renderRanking() {
+
+
+  rankingMemory.sort(
+
+    (a, b) =>
+      a.time -
+      b.time
+
+  );
+
+
+  if (
+    !rankingMemory.length
+  ) {
+
+
+    el('ranking')
+      .innerHTML =
+
+      '<p style="color:#777">' +
+
+      'Ainda não há participantes ' +
+      'no ranking.' +
+
+      '</p>';
+
+
+    return;
+
+  }
+
+
+
+  el('ranking')
+    .innerHTML =
+
+
+    '<div class="rankhead">' +
+
+      '<span>POS.</span>' +
+
+      '<span>NOME</span>' +
+
+      '<span class="time">' +
+        'TEMPO' +
+      '</span>' +
+
+    '</div>'
+
+
+    +
+
+
+    rankingMemory
+      .map(
+
+        (
+          item,
+          i
+        ) =>
+
+
+          `
+
+          <div
+            class="
+              rankrow
+              ${
+                i === 0
+                ? 'first'
+                : ''
+              }
+            "
+          >
+
+            <b>
+
+              ${i + 1}º
+
+            </b>
+
+
+            <span>
+
+              ${safe(item.name)}
+
+            </span>
+
+
+            <span class="time">
+
+              ${
+                formatTime(
+                  item.time
+                )
+              }
+
+            </span>
+
+          </div>
+
+          `
+
+      )
+      .join('');
+
+}
+
+
+
+/*
+=====================================
+CRIAR CARD
+=====================================
+*/
+
+
+function makeCard(
+  person,
+  type
+) {
+
+
+  const button =
+    document
+      .createElement(
+        'button'
+      );
+
+
+  button.type =
+    'button';
+
+
+  button.className =
+    'card';
+
+
+
+  const src =
+
+    type === 'child'
+
+      ? person.child
+
+      : person.adult;
+
+
+
+  const label =
+
+    type === 'child'
+
+      ? person.childLabel
+
+      : person.adultLabel;
+
+
+
+  const photo =
+    document
+      .createElement(
+        'div'
+      );
+
+
+  photo.className =
+    'photo';
+
+
+
+  const img =
+    document
+      .createElement(
+        'img'
+      );
+
+
+  img.src =
+    src;
+
+
+  img.alt =
+    label;
+
+
+
+  /*
+  Se a foto não carregar,
+  mostra qual arquivo
+  deveria estar ali.
+  */
+
+
+  img.onerror =
+    () => {
+
+
+      photo.innerHTML =
+
+        `
+
+        <div class="missing">
+
+          <b>
+
+            ${label}
+
+          </b>
+
+          <br>
+
+          ${src}
+
+        </div>
+
+        `;
+
+    };
+
+
+
+  const text =
+    document
+      .createElement(
+        'strong'
+      );
+
+
+  text.textContent =
+    label;
+
+
+
+  photo.appendChild(
+    img
+  );
+
+
+  button.append(
+    photo,
+    text
+  );
+
+
+
+  button
+    .addEventListener(
+
+      'click',
+
+      () =>
+
+        choose(
+          button,
+          person,
+          type
+        )
+
+    );
+
+
+  return button;
+
+}
+
+
+
+/*
+=====================================
+CONTAGEM REGRESSIVA
+=====================================
+*/
+
+
+function beginCountdown() {
+
+
+  playerName =
+    el('username')
+      .value
+      .trim();
+
+
+
+  if (
+    !playerName
+  ) {
+
+
+    el('username')
+      .focus();
+
+
+    return;
+
+  }
+
+
+
+  el('startBtn')
+    .disabled =
+      true;
+
+
+
+  let n =
+    3;
+
+
+
+  el('countdown')
+    .textContent =
+      n;
+
+
+
+  const id =
+    setInterval(
+
+      () => {
+
+
+        n--;
+
+
+
+        if (
+          n > 0
+        ) {
+
+
+          el('countdown')
+            .textContent =
+              n;
+
+        }
+
+
+        else if (
+          n === 0
+        ) {
+
+
+          el('countdown')
+            .textContent =
+              'VALENDO!';
+
+        }
+
+
+        else {
+
+
+          clearInterval(
+            id
+          );
+
+
+          el('countdown')
+            .textContent =
+              '';
+
+
+          el('startBtn')
+            .disabled =
+              false;
+
+
+          startGame();
+
+        }
+
+      },
+
+      650
+
+    );
+
+}
+
+
+
+/*
+=====================================
+INICIAR JOGO
+=====================================
+*/
+
+
+function startGame() {
+
+
+  childChoice =
+    null;
+
+
+  adultChoice =
+    null;
+
+
+  hits =
+    0;
+
+
+  busy =
+    false;
+
+
+
+  el('children')
+    .innerHTML =
+      '';
+
+
+  el('adults')
+    .innerHTML =
+      '';
+
+
+
+  /*
+  Embaralha as crianças.
+  */
+
+
+  shuffle(
+    people
+  )
+  .forEach(
+
+    person =>
+
+      el('children')
+        .appendChild(
+
+          makeCard(
+            person,
+            'child'
+          )
+
+        )
+
+  );
+
+
+
+  /*
+  Embaralha os adultos
+  separadamente.
+  */
+
+
+  shuffle(
+    people
+  )
+  .forEach(
+
+    person =>
+
+      el('adults')
+        .appendChild(
+
+          makeCard(
+            person,
+            'adult'
+          )
+
+        )
+
+  );
+
+
+
+  el('player')
+    .textContent =
+      playerName;
+
+
+
+  el('hits')
+    .textContent =
+      '0';
+
+
+
+  el('timer')
+    .textContent =
+      '00:00.0';
+
+
+
+  el('feedback')
+    .className =
+      'feedback';
+
+
+
+  el('feedback')
+    .textContent =
+      'Encontre todos os pares.';
+
+
+
+  showScreen(
+    2
+  );
+
+
+
+  startedAt =
+    performance.now();
+
+
+
+  clearInterval(
+    timerId
+  );
+
+
+
+  timerId =
+    setInterval(
+
+      () => {
+
+
+        elapsed =
+
+          performance.now()
+
+          -
+
+          startedAt;
+
+
+
+        el('timer')
+          .textContent =
+
+          formatTime(
+            elapsed
+          );
+
+      },
+
+      100
+
+    );
+
+}
+
+
+
+/*
+=====================================
+SELEÇÃO DOS CARDS
+=====================================
+*/
+
+
+function choose(
+  button,
+  person,
+  type
+) {
+
+
+  if (
+    busy
+    ||
+    button
+      .classList
+      .contains(
+        'matched'
+      )
+  ) {
+
+
+    return;
+
+  }
+
+
+
+  const old =
+
+    type === 'child'
+
+      ? childChoice
+
+      : adultChoice;
+
+
+
+  if (
+    old
+  ) {
+
+
+    old.button
+      .classList
+      .remove(
+        'selected'
+      );
+
+  }
+
+
+
+  button
+    .classList
+    .add(
+      'selected'
+    );
+
+
+
+  if (
+    type === 'child'
+  ) {
+
+
+    childChoice = {
+
+      button,
+      person
+
+    };
+
+  }
+
+
+  else {
+
+
+    adultChoice = {
+
+      button,
+      person
+
+    };
+
+  }
+
+
+
+  if (
+    childChoice
+    &&
+    adultChoice
+  ) {
+
+
+    verify();
+
+  }
+
+}
+
+
+
+/*
+=====================================
+VERIFICAR MATCH
+=====================================
+*/
+
+
+function verify() {
+
+
+  busy =
+    true;
+
+
+
+  if (
+
+    childChoice.person.id
+
+    ===
+
+    adultChoice.person.id
+
+  ) {
+
+
+    hits++;
+
+
+
+    childChoice.button
+      .classList
+      .add(
+        'matched'
+      );
+
+
+    adultChoice.button
+      .classList
+      .add(
+        'matched'
+      );
+
+
+
+    childChoice.button
+      .classList
+      .remove(
+        'selected'
+      );
+
+
+    adultChoice.button
+      .classList
+      .remove(
+        'selected'
+      );
+
+
+
+    childChoice =
+      null;
+
+
+    adultChoice =
+      null;
+
+
+
+    el('hits')
+      .textContent =
+        String(
+          hits
+        );
+
+
+
+    el('feedback')
+      .className =
+        'feedback good';
+
+
+
+    el('feedback')
+      .textContent =
+        '✓ Match correto!';
+
+
+
+    busy =
+      false;
+
+
+
+    /*
+    Quando todos os 11
+    pares forem encontrados,
+    encerra a partida.
+    */
+
+
+    if (
+      hits === TOTAL
+    ) {
+
+
+      setTimeout(
+
+        finishGame,
+
+        250
+
+      );
+
+    }
+
+  }
+
+
+  else {
+
+
+    el('feedback')
+      .className =
+        'feedback bad';
+
+
+
+    el('feedback')
+      .textContent =
+        'Ainda não. Tente novamente!';
+
+
+
+    setTimeout(
+
+      () => {
+
+
+        childChoice.button
+          .classList
+          .remove(
+            'selected'
+          );
+
+
+        adultChoice.button
+          .classList
+          .remove(
+            'selected'
+          );
+
+
+        childChoice =
+          null;
+
+
+        adultChoice =
+          null;
+
+
+        busy =
+          false;
+
+      },
+
+      450
+
+    );
+
+  }
+
+}
+
+
+
+/*
+=====================================
+FINALIZAR PARTIDA
+=====================================
+*/
+
+
+function finishGame() {
+
+
+  elapsed =
+
+    performance.now()
+
+    -
+
+    startedAt;
+
+
+
+  clearInterval(
+    timerId
+  );
+
+
+
+  /*
+  Registra resultado
+  somente na memória
+  desta página.
+  */
+
+
+  rankingMemory.push({
+
+    name:
+      playerName,
+
+    time:
+      Math.round(
+        elapsed
+      )
+
+  });
+
+
+
+  /*
+  Menor tempo primeiro.
+  */
+
+
+  rankingMemory.sort(
+
+    (a, b) =>
+
+      a.time -
+      b.time
+
+  );
+
+
+
+  el('resultText')
+    .innerHTML =
+
+    `
+
+    <b>
+
+      ${safe(playerName)}
+
+    </b>,
+
+    seu tempo foi
+
+    <b>
+
+      ${formatTime(elapsed)}
+
+    </b>.
+
+    `;
+
+
+
+  renderRanking();
+
+
+
+  /*
+  Esta linha abre
+  a terceira página.
+  */
+
+
+  showScreen(
+    3
+  );
+
+}
+
+
+
+/*
+=====================================
+ABRIR RANKING SEM JOGAR
+=====================================
+*/
+
+
+function openRanking() {
+
+
+  el('resultText')
+    .textContent =
+
+    'Lista de participantes desta sessão, ' +
+    'do melhor para o pior tempo.';
+
+
+
+  renderRanking();
+
+
+
+  showScreen(
+    3
+  );
+
+}
+
+
+
+/*
+=====================================
+NOVO PARTICIPANTE
+=====================================
+*/
+
+
+function newPlayer() {
+
+
+  clearInterval(
+    timerId
+  );
+
+
+  playerName =
+    '';
+
+
+  el('username')
+    .value =
+      '';
+
+
+  el('resultText')
+    .textContent =
+      '';
+
+
+  showScreen(
+    1
+  );
+
+
+  el('username')
+    .focus();
+
+}
+
+
+
+/*
+=====================================
+EVENTOS
+=====================================
+*/
+
+
+el('startBtn')
+  .addEventListener(
+
+    'click',
+
+    beginCountdown
+
+  );
+
+
+el('rankBtn')
+  .addEventListener(
+
+    'click',
+
+    openRanking
+
+  );
+
+
+el('newBtn')
+  .addEventListener(
+
+    'click',
+
+    newPlayer
+
+  );
+
+
+el('username')
+  .addEventListener(
+
+    'keydown',
+
+    event => {
+
+
+      if (
+        event.key ===
+        'Enter'
+      ) {
+
+
+        beginCountdown();
+
+      }
+
+    }
+
+  );
+
+
+</script>
+
+</body>
+
+</html>
