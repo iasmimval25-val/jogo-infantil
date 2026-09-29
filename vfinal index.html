@@ -1,0 +1,226 @@
+<!doctype html>
+
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#6c4cf1"
+  >
+
+  <title>
+    Quem é quem? | Jogo da Memória
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+
+<body>
+
+  <main class="app">
+
+
+    <header class="hero">
+
+      <div
+        class="sparkle"
+        aria-hidden="true"
+      >
+        ✦
+      </div>
+
+      <p class="eyebrow">
+        DESAFIO DO TIME
+      </p>
+
+      <h1>
+        Quem é
+        <span>quem?</span>
+      </h1>
+
+      <p class="intro">
+        Pequenos no tamanho,
+        gigantes nas histórias.
+        Encontre cada pessoa!
+      </p>
+
+    </header>
+
+
+    <br><br>
+
+
+    <!-- TELA INICIAL -->
+
+
+    <section
+      id="start-panel"
+      class="panel start-panel"
+    >
+
+      <div
+        class="emoji"
+        aria-hidden="true"
+      >
+        🧩
+      </div>
+
+      <h2>
+        Preparado para o desafio?
+      </h2>
+
+      <p>
+        Encontre os pares:
+        uma foto da infância
+        e uma foto atual
+        da mesma pessoa.
+      </p>
+
+      <label for="player-name">
+        Seu nome
+      </label>
+
+      <input
+        id="player-name"
+        type="text"
+        maxlength="40"
+        placeholder="Digite seu nome"
+        autocomplete="name"
+      >
+
+      <button
+        id="start-button"
+        class="primary-button"
+      >
+        Começar jogo
+        <span>→</span>
+      </button>
+
+      <p class="small-note">
+        Dica: você pode jogar
+        no celular ou no computador.
+      </p>
+
+    </section>
+
+
+    <br><br>
+
+
+    <!-- JOGO -->
+
+
+    <section
+      id="game-panel"
+      class="hidden"
+    >
+
+
+      <div class="stats">
+
+
+        <div class="stat">
+
+          <span class="stat-icon">
+            ⏱️
+          </span>
+
+          <span>
+
+            <small>
+              Tempo
+            </small>
+
+            <strong id="timer">
+              00:00
+            </strong>
+
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span class="stat-icon">
+            🎯
+          </span>
+
+          <span>
+
+            <small>
+              Tentativas
+            </small>
+
+            <strong id="attempts">
+              0
+            </strong>
+
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span class="stat-icon">
+            🧡
+          </span>
+
+          <span>
+
+            <small>
+              Pares
+            </small>
+
+            <strong id="pairs">
+              0/11
+            </strong>
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="game-toolbar">
+
+        <p>
+          Encontre a infância
+          e a versão atual
+          da mesma pessoa.
+        </p>
+
+        <button
+          id="restart-button"
+          class="text-button"
+        >
+          ↻ Reiniciar
+        </button>
+
+      </div>
+
+
+      <!-- CRIANÇAS -->
+
+
+      <div class="game-section">
+
+        <div class="section-heading">
+
+          <p 
