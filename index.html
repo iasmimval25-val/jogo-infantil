@@ -1,107 +1,577 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jogo infantil</title>
-    <style>
-      * {
-        box-sizing: border-box;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quem é Quem? | Jogo Infantil</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Arial', Helvetica, sans-serif;
+      background: linear-gradient(135deg, #f7d86f, #f7b5ce, #8ad7ff);
+      color: #333;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 900;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      font-size: 1.2rem;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .card-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    .intro-screen h2 {
+      margin: 0 0 20px;
+      font-size: 2.2rem;
+      color: #333;
+    }
+
+    .intro-screen p {
+      margin: 0 0 30px;
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      max-width: 300px;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 15px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #f7d86f;
+      box-shadow: 0 0 10px rgba(247, 216, 111, 0.3);
+    }
+
+    .btn {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f7d86f, #f9c76d);
+      color: #333;
+      box-shadow: 0 8px 20px rgba(247, 216, 111, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(247, 216, 111, 0.6);
+    }
+
+    .btn-secondary {
+      background: #f7b5ce;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(247, 181, 206, 0.4);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(247, 181, 206, 0.6);
+    }
+
+    .game-info {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, #f7d86f, #f9c76d);
+      padding: 15px 25px;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(247, 216, 111, 0.3);
+      margin: 10px;
+    }
+
+    .game-board {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .game-board h3 {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 1.3rem;
+      color: #333;
+      margin: 0;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      background: #fff;
+      border: 3px solid #ddd;
+      border-radius: 15px;
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #f7d86f;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .card.selected {
+      border-color: #f7b5ce;
+      background: #fff5f8;
+      box-shadow: 0 0 15px rgba(247, 181, 206, 0.5);
+    }
+
+    .card.matched {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .card-image {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #f0f0f0;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    .card-label {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .feedback {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 20px 0;
+      min-height: 30px;
+    }
+
+    .feedback.success {
+      color: #4caf50;
+    }
+
+    .feedback.error {
+      color: #f44336;
+    }
+
+    .timer {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #f7b5ce;
+    }
+
+    .ranking-list {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .ranking-item {
+      background: linear-gradient(135deg, #fff9e6, #ffe6f0);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      border-left: 4px solid #f7d86f;
+    }
+
+    .ranking-position {
+      font-size: 1.5rem;
+      color: #f7d86f;
+      margin-right: 15px;
+    }
+
+    .ranking-name {
+      flex: 1;
+      color: #333;
+    }
+
+    .ranking-time {
+      color: #f7b5ce;
+      font-size: 1.1rem;
+    }
+
+    .trophy {
+      font-size: 3rem;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      .game-board {
+        grid-template-columns: 1fr;
       }
 
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background: linear-gradient(135deg, #f7d86f, #f7b5ce, #8ad7ff);
-        font-family: Arial, Helvetica, sans-serif;
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .game-shell {
-        width: min(420px, 90vw);
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        padding: 18px;
+      header h1 {
+        font-size: 2rem;
       }
 
-      .card {
-        background: rgba(255, 255, 255, 0.26);
-        border: 2px solid rgba(255, 255, 255, 0.48);
-        border-radius: 24px;
-        padding: 22px 18px;
-        box-shadow: 0 12px 28px rgba(90, 50, 30, 0.12);
-        backdrop-filter: blur(10px);
-        text-align: center;
+      .card-container {
+        padding: 20px;
       }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 Quem é Quem? 🎮</h1>
+    <p>Descubra os pares entre crianças e adultos!</p>
+  </header>
 
-      .card.highlight {
-        background: rgba(255, 255, 255, 0.34);
-      }
-
-      .emoji {
-        font-size: 2.5rem;
-        display: block;
-        margin-bottom: 8px;
-      }
-
-      .title {
-        margin: 0;
-        font-size: clamp(2rem, 6vw, 3.2rem);
-        line-height: 1;
-        font-weight: 800;
-        color: #fffefc;
-        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-      }
-
-      .subtitle {
-        margin: 10px 0 0;
-        font-size: 1.06rem;
-        color: #fffaf5;
-        font-weight: 600;
-      }
-
-      .progress {
-        width: 100%;
-        height: 12px;
-        background: rgba(255, 255, 255, 0.28);
-        border-radius: 999px;
-        overflow: hidden;
-        margin-top: 10px;
-      }
-
-      .progress-bar {
-        width: 75%;
-        height: 100%;
-        background: linear-gradient(90deg, #f7d86f, #f9c76d, #f7b14a);
-        border-radius: inherit;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="game-shell">
-      <div class="card">
-        <span class="emoji">🎈</span>
-        <h2 class="title">11</h2>
-        <p class="subtitle">pares para descobrir</p>
-      </div>
-
-      <div class="card highlight">
-        <span class="emoji">🚀</span>
-        <h2 class="title">3x</h2>
-        <p class="subtitle">mais divertido com desafio</p>
-      </div>
-
-      <div class="card">
-        <span class="emoji">🎉</span>
-        <h2 class="title">90s</h2>
-        <p class="subtitle">tempo para ganhar a rodada</p>
-      </div>
-
-      <div class="progress">
-        <div class="progress-bar"></div>
+  <div class="container">
+    <!-- Tela de Início -->
+    <div id="introScreen" class="screen active">
+      <div class="card-container intro-screen">
+        <h2>Bem-vindo ao Jogo!</h2>
+        <p>Digite seu nome para começar a jogar</p>
+        <input type="text" id="playerName" placeholder="Seu nome aqui..." maxlength="20" />
+        <br />
+        <button class="btn btn-primary" onclick="startGame()">Começar</button>
       </div>
     </div>
-  </body>
+
+    <!-- Tela de Jogo -->
+    <div id="gameScreen" class="screen">
+      <div class="card-container">
+        <div class="game-info">
+          <div class="info-box">Jogador: <span id="playerDisplay">-</span></div>
+          <div class="info-box">Acertos: <span id="matchCount">0</span>/11</div>
+          <div class="info-box timer">⏱ <span id="timer">90</span>s</div>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+
+        <div class="game-board">
+          <h3>👶 Crianças</h3>
+          <h3>🧑 Adultos</h3>
+          <div id="childrenGrid" class="cards-grid"></div>
+          <div id="adultsGrid" class="cards-grid"></div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="endGame()">Sair do Jogo</button>
+      </div>
+    </div>
+
+    <!-- Tela de Resultado -->
+    <div id="resultScreen" class="screen">
+      <div class="card-container">
+        <div class="trophy">🏆</div>
+        <h2>Jogo Finalizado!</h2>
+        <p id="resultMessage" style="font-size: 1.1rem; color: #666;"></p>
+
+        <div class="ranking-list">
+          <h3 style="text-align: center; color: #333;">🎯 Ranking</h3>
+          <div id="rankingList"></div>
+        </div>
+
+        <br />
+        <button class="btn btn-primary" onclick="backToIntro()">Jogar Novamente</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TOTAL_PAIRS = 11;
+    const TIME_LIMIT = 90;
+
+    let currentPlayer = '';
+    let matchedPairs = [];
+    let selectedChild = null;
+    let selectedAdult = null;
+    let attempts = 0;
+    let timeLeft = TIME_LIMIT;
+    let timerInterval = null;
+    let gameActive = false;
+    let rankings = JSON.parse(localStorage.getItem('rankings')) || [];
+
+    const persons = [
+      { id: 1, name: 'Pessoa 1', emoji: '👧' },
+      { id: 2, name: 'Pessoa 2', emoji: '👦' },
+      { id: 3, name: 'Pessoa 3', emoji: '👧' },
+      { id: 4, name: 'Pessoa 4', emoji: '👦' },
+      { id: 5, name: 'Pessoa 5', emoji: '👧' },
+      { id: 6, name: 'Pessoa 6', emoji: '👦' },
+      { id: 7, name: 'Pessoa 7', emoji: '👧' },
+      { id: 8, name: 'Pessoa 8', emoji: '👦' },
+      { id: 9, name: 'Pessoa 9', emoji: '👧' },
+      { id: 10, name: 'Pessoa 10', emoji: '👦' },
+      { id: 11, name: 'Pessoa 11', emoji: '👧' }
+    ];
+
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    function startGame() {
+      const name = document.getElementById('playerName').value.trim();
+      if (!name) {
+        alert('Digite seu nome para começar!');
+        return;
+      }
+
+      currentPlayer = name;
+      matchedPairs = [];
+      selectedChild = null;
+      selectedAdult = null;
+      attempts = 0;
+      timeLeft = TIME_LIMIT;
+      gameActive = true;
+
+      document.getElementById('playerDisplay').textContent = currentPlayer;
+      document.getElementById('matchCount').textContent = '0';
+      document.getElementById('timer').textContent = TIME_LIMIT;
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('feedback').className = 'feedback';
+
+      renderGame();
+      showScreen('gameScreen');
+      startTimer();
+    }
+
+    function renderGame() {
+      const shuffledPersons = shuffle(persons);
+      const childrenGrid = document.getElementById('childrenGrid');
+      const adultsGrid = document.getElementById('adultsGrid');
+
+      childrenGrid.innerHTML = '';
+      adultsGrid.innerHTML = '';
+
+      shuffledPersons.forEach(person => {
+        const childCard = createCard(person, 'child');
+        const adultCard = createCard(person, 'adult');
+
+        childrenGrid.appendChild(childCard);
+        adultsGrid.appendChild(adultCard);
+      });
+    }
+
+    function createCard(person, type) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.id = person.id;
+      card.dataset.type = type;
+
+      if (matchedPairs.includes(person.id)) {
+        card.classList.add('matched');
+      }
+
+      const emoji = type === 'child' ? '👶' : '🧑';
+
+      card.innerHTML = `
+        <div class="card-image">${emoji}</div>
+        <div class="card-label">${type === 'child' ? 'Criança' : 'Adulto'} ${person.id}</div>
+      `;
+
+      if (!matchedPairs.includes(person.id)) {
+        card.onclick = () => selectCard(card, person.id, type);
+      }
+
+      return card;
+    }
+
+    function selectCard(cardEl, personId, type) {
+      if (!gameActive || matchedPairs.includes(personId)) return;
+
+      if (type === 'child') {
+        if (selectedChild) selectedChild.classList.remove('selected');
+        selectedChild = cardEl;
+        selectedChild.classList.add('selected');
+      } else {
+        if (selectedAdult) selectedAdult.classList.remove('selected');
+        selectedAdult = cardEl;
+        selectedAdult.classList.add('selected');
+      }
+
+      if (selectedChild && selectedAdult) {
+        checkMatch();
+      }
+    }
+
+    function checkMatch() {
+      const childId = parseInt(selectedChild.dataset.id);
+      const adultId = parseInt(selectedAdult.dataset.id);
+      attempts++;
+
+      if (childId === adultId) {
+        matchedPairs.push(childId);
+        showFeedback('✅ Acerto!', 'success');
+        selectedChild.classList.add('matched');
+        selectedAdult.classList.add('matched');
+        selectedChild.classList.remove('selected');
+        selectedAdult.classList.remove('selected');
+        selectedChild = null;
+        selectedAdult = null;
+
+        document.getElementById('matchCount').textContent = matchedPairs.length;
+
+        if (matchedPairs.length === TOTAL_PAIRS) {
+          endGame();
+        }
+      } else {
+        showFeedback('❌ Não foi dessa vez!', 'error');
+        setTimeout(() => {
+          selectedChild.classList.remove('selected');
+          selectedAdult.classList.remove('selected');
+          selectedChild = null;
+          selectedAdult = null;
+        }, 500);
+      }
+    }
+
+    function showFeedback(message, type) {
+      const feedback = document.getElementById('feedback');
+      feedback.textContent = message;
+      feedback.className = `feedback ${type}`;
+    }
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          gameActive = false;
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function endGame() {
+      gameActive = false;
+      clearInterval(timerInterval);
+
+      const finalTime = TIME_LIMIT - timeLeft;
+      const message = matchedPairs.length === TOTAL_PAIRS
+        ? `🎉 Parabéns ${currentPlayer}! Você completou em ${finalTime}s!`
+        : `⏰ Tempo esgotado! Você acertou ${matchedPairs.length} de ${TOTAL_PAIRS} pares.`;
+
+      document.getElementById('resultMessage').textContent = message;
+
+      if (matchedPairs.length === TOTAL_PAIRS) {
+        rankings.push({ name: currentPlayer, time: finalTime });
+        rankings.sort((a, b) => a.time - b.time);
+        rankings = rankings.slice(0, 10);
+        localStorage.setItem('rankings', JSON.stringify(rankings));
+      }
+
+      renderRanking();
+      showScreen('resultScreen');
+    }
+
+    function renderRanking() {
+      const rankingList = document.getElementById('rankingList');
+      rankingList.innerHTML = '';
+
+      if (rankings.length === 0) {
+        rankingList.innerHTML = '<p style="text-align: center; color: #999;">Nenhuma pontuação ainda</p>';
+        return;
+      }
+
+      rankings.forEach((rank, index) => {
+        const item = document.createElement('div');
+        item.className = 'ranking-item';
+        item.innerHTML = `
+          <span class="ranking-position">#${index + 1}</span>
+          <span class="ranking-name">${rank.name}</span>
+          <span class="ranking-time">${rank.time}s</span>
+        `;
+        rankingList.appendChild(item);
+      });
+    }
+
+    function backToIntro() {
+      document.getElementById('playerName').value = '';
+      showScreen('introScreen');
+    }
+  </script>
+</body>
 </html>
